@@ -8,7 +8,8 @@ const sendOtp = async (req, res) => {
         const otp = generateOtp();
 
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            // from: process.env.EMAIL_USER,
+            from:  '"No Reply" <sakshimehra072@gmail.com>',
             to: email,
             subject: "Email Verification OTP",
             text: `Your OTP is ${otp}`,

@@ -148,10 +148,6 @@
 
 
 
-
-
-
-
 import { useState } from "react";
 
 function Register() {
@@ -163,7 +159,6 @@ function Register() {
   const [error, setError] = useState("");
   const [showEmailOtpBox, setShowEmailOtpBox] = useState(false);
 
-  // SEND EMAIL OTP
   const sendEmailOtp = async () => {
     if (name.trim() === "") {
       setError("Name is required");
@@ -204,7 +199,6 @@ function Register() {
     }
   };
 
-  // VERIFY EMAIL OTP
   const verifyEmailOtp = async () => {
     if (emailOtp.trim() === "") {
       setError("Enter Email OTP");
@@ -241,86 +235,121 @@ function Register() {
     }
   };
 
-  return (
-    <div style={{ padding: "20px" }}>
-      <h1>Registration Page</h1>
+  return (  
 
-      {/* NAME */}
-      <label>Name</label>
-      <br />
 
-      <input
-        type="text"
-        placeholder="Enter Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+  <div className="w-screen min-h-screen flex items-center justify-center bg-slate-50 p-6">
 
-      <br />
-      <br />
+  <div className="w-full max-w-md rounded-2xl bg-gray-200 p-8 shadow-xl shadow-slate-100 border border-slate-100 flex flex-col gap-y-6">
 
-      {/* PHONE */}
-      <label>Phone Number</label>
-      <br />
+    <div className="text-center">
+      <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-900 tracking-tight">
+        Sign Up
+      </h1>
 
-      <input
-        type="text"
-        placeholder="Enter Phone Number"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-      />
+      <p className="text-sm text-slate-500 mt-4">
+        Please fill in your details to create an account.
+      </p>
+    </div>
 
-      <br />
-      <br />
+    <div className="flex flex-col gap-y-4">
 
-      {/* EMAIL */}
-      <label>Email</label>
-      <br />
+      {/* Name */}
+      <div className="flex flex-col gap-y-1.5">
+        <label className="text-sm font-medium text-slate-700">
+          Name
+        </label>
 
-      <input
-        type="email"
-        placeholder="Enter Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition-all"
+        />
+      </div>
 
-      <br />
-      <br />
+      {/* Phone */}
+      <div className="flex flex-col gap-y-1.5">
+        <label className="text-sm font-medium text-slate-700">
+          Phone Number
+        </label>
 
-      <button onClick={sendEmailOtp}>
-        Send Email OTP
-      </button>
+        <input
+          type="text"
+          placeholder="Enter Phone Number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition-all"
+        />
+      </div>
 
-      {/* EMAIL OTP BOX */}
-      {showEmailOtpBox && (
-        <div>
-          <br />
+      {/* Email */}
+      <div className="flex flex-col gap-y-1.5">
+        <label className="text-sm font-medium text-slate-700">
+          Email Address
+        </label>
 
-          <label>Enter Email OTP</label>
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition-all"
+        />
+      </div>
 
-          <br />
+    </div>
+
+    {/* Send OTP Button */}
+    <button
+      onClick={sendEmailOtp}
+      className="w-full rounded-lg bg-indigo-600 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-100 active:scale-[0.98] transition-all"
+    >
+      Send Email OTP
+    </button>
+
+    {/* OTP Box */}
+    {showEmailOtpBox && (
+      <div className="rounded-xl bg-slate-50 p-4 border border-slate-100 flex flex-col gap-y-4">
+
+        <div className="flex flex-col gap-y-1.5">
+          <label className="text-sm font-medium text-slate-700">
+            Enter Email OTP
+          </label>
 
           <input
             type="text"
             placeholder="Enter Email OTP"
             value={emailOtp}
             onChange={(e) => setEmailOtp(e.target.value)}
+            className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-100 transition-all"
           />
-
-          <br />
-          <br />
-
-          <button onClick={verifyEmailOtp}>
-            Verify Email OTP
-          </button>
         </div>
-      )}
 
-      <br />
+        <button
+          onClick={verifyEmailOtp}
+          className="w-full rounded-lg bg-purple-600 py-2.5 text-sm font-semibold text-white shadow-md shadow-purple-100 hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-100 active:scale-[0.98] transition-all"
+        >
+          Verify Email OTP
+        </button>
 
-      <p style={{ color: "red" }}>{error}</p>
-    </div>
+      </div>
+    )}
+
+    {/* Error */}
+    {error && (
+      <p className="text-sm font-medium text-red-500 bg-red-50 rounded-lg p-3 border border-red-100 text-center">
+        {error}
+      </p>
+    )}
+
+  </div>
+
+</div>
+
   );
+
 }
 
 export default Register;
